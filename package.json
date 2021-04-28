@@ -1,17 +1,36 @@
 {
-  "name": "",
-  "version": "",
-  "description": "",
-  "author": "",
-  "license": "",
+  "name": "rpt27-front-end-capstone",
+  "description": "> Project description",
+  "author": "Eric Knechtges",
+  "license": "ISC",
   "engines": {
     "node": ">=6.13.0"
   },
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
+    "enzyme": "^3.11.0",
+    "express": "^4.17.1",
+    "jest": "^26.6.3",
+    "mongo": "^0.1.0",
+    "mongodb": "^3.6.6",
+    "mongoose": "^5.12.6",
+    "nginx": "^1.0.2",
+    "react": "^17.0.2",
+    "travis": "^0.1.1",
+    "webpack": "^5.36.0",
+    "webpack-dev": "^1.1.1"
   },
   "devDependencies": {
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor"
-  }
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git"
+  },
+  "version": "1.0.0",
+  "main": "index.html",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Charlotte-Badger/Overview.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Charlotte-Badger/Overview/issues"
+  },
+  "homepage": "https://github.com/Charlotte-Badger/Overview#readme"
 }
