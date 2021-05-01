@@ -7,17 +7,18 @@ const capitalize = function (string) {
 
 
 const lang = [
-  "Mandarin, Spanish, Hindustani, Bengali, Portuguese, Russian, Japanese, French, German, Tamil, Javanese, Italian, Romanian, Greek, Hipster"
+  "Mandarin", "Spanish", "Hindustani", "Bengali", "Portuguese", "Russian", "Japanese", "French", "German", "Tamil", "Javanese", "Italian", "Romanian", "Greek", "Hipster"
 ];
 
 const create = function() {
   const data = [];
+  let captions = [];
   for (let i = 1; i <= 100; i++) {
     console.log('index', i);
-    let captions = [{language: "English"}];
+    captions = ["English"];
     for (let j = 1; j <= 5; j++) {
-      let rand = Math.random() * lang.length;
-      captions.push({language: lang[rand]});
+      let rand = Math.floor(Math.random() * lang.length);
+      captions.push(lang[rand]);
     }
     data.push({
       "_id": i,
@@ -27,7 +28,7 @@ const create = function() {
       "author": Math.floor((Math.random() * 99)) + 1, // external ID
       "thumbnail": faker.image.abstract(),
       "language": "English",
-      "captions": [captions]
+      "captions": captions
     });
   }
   db.save(data);

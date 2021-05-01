@@ -8,10 +8,6 @@ var db = mongoose.connection;
 
 db.on("error", console.error.bind(console, "connection error:"));
 
-let captionSchema = new mongoose.Schema({
-  "language": String
-});
-
 let overviewSchema = new mongoose.Schema({
   "_id": Number,
   "title": String, // this may actually be fetched from course content API instead -- TBD
@@ -20,7 +16,7 @@ let overviewSchema = new mongoose.Schema({
   "author": Number, // external ID
   "thumbnail": String,
   "language": String,
-  "captions": [captionSchema]
+  "captions": [String]
 });
 
 let Overview = mongoose.model('Overview', overviewSchema);
@@ -38,7 +34,7 @@ let save = (records) => {
       captions: record.captions
     });
     Promise.resolve(entry.save())
-    .then(doc => console.log('Saved', doc._doc.name))
+    .then(doc => console.log('Saved', doc._doc.title))
     .catch(err => console.log(err))
   })
 };
