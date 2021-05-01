@@ -40,7 +40,7 @@ let save = (records) => {
 };
 
 let get = (_id, callback) => {
-  Repo.find({_id: _id})
+  Overview.find({_id: _id})
   .then(doc => callback(doc))
   .catch(err => console.log(err));
 }
@@ -49,3 +49,5 @@ let get = (_id, callback) => {
 
 module.exports.save = save;
 module.exports.get = get;
+
+//
