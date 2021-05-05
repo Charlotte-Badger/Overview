@@ -1,17 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import faker from 'faker';
+import axios from 'axios';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      overview: {}
     };
   };
 
   capitalize(string) {
     return string.slice(0, 1).toUpperCase() + string.slice(1);
+  }
+
+  getOverview(id = 1) {
+    axios.get(`/overview/?courseId=${id}`)
+    .then((res) => {
+      let overview = res.data;
+      this.setState({overview});
+    });
   }
 
   render () {
