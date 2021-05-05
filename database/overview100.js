@@ -20,16 +20,11 @@ const create = function() {
       let rand = Math.floor(Math.random() * lang.length);
       captions.push(lang[rand]);
     }
-    let subjects = [];
-    for (let k = 1; k <= 3; k++) {
-      subjects.push(faker.company.catchPhraseAdjective());
-    }
     data.push({
-      "courseId": i,
+      "_id": i,
       "title": faker.company.catchPhrase(), // this may actually be fetched from course content API instead -- TBD
       "tagline": capitalize(faker.hacker.ingverb()) + ' the ' + faker.hacker.adjective() + ' ' + faker.hacker.noun(),
       "students": Math.floor((Math.random() * 90000)) + 10000,
-      "subjects": subjects,
       "author": Math.floor((Math.random() * 99)) + 1, // external ID
       "thumbnail": faker.image.abstract(),
       "language": "English",
