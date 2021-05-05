@@ -8,28 +8,26 @@ var db = mongoose.connection;
 
 db.on("error", console.error.bind(console, "connection error:"));
 
-const overviewSchema = new mongoose.Schema({
-  "courseId": Number,
+let overviewSchema = new mongoose.Schema({
+  "_id": Number,
   "title": String, // this may actually be fetched from course content API instead -- TBD
   "tagline": String,
   "students": Number,
-  "subjects": [String],
   "author": Number, // external ID
   "thumbnail": String,
   "language": String,
   "captions": [String]
 });
 
-const Overview = mongoose.model('Overview', overviewSchema);
+let Overview = mongoose.model('Overview', overviewSchema);
 
-const save = (records) => {
+let save = (records) => {
   records.forEach(record => {
     let entry = new Overview({
-      courseId: record.courseId,
+      _id: record._id,
       title: record.title,
       tagline: record.tagline,
       students: record.students,
-      subjects: record.subjects,
       author: record.author,
       thumbnail: record.thumbnail,
       language: record.language,
@@ -41,8 +39,8 @@ const save = (records) => {
   })
 };
 
-const get = (courseId, callback) => {
-  Overview.find({courseId: courseId})
+let get = (_id, callback) => {
+  Repo.find({_id: _id})
   .then(doc => callback(doc))
   .catch(err => console.log(err));
 }
@@ -51,5 +49,3 @@ const get = (courseId, callback) => {
 
 module.exports.save = save;
 module.exports.get = get;
-
-//
