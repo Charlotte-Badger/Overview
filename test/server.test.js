@@ -1,22 +1,33 @@
-const app = require("../server/server.js")
 const path = require('path');
 const db = require('../database/overview.js');
-const f = require('fixtures');
-const React = require('react');
-const renderer = require ('react-test-renderer');
-const App = require('../public/overview.js');
+const f = require('./fixtures.js');
+const supertest = require('supertest');
+const app = require('../server/server.js');
+const request = supertest(app);
+import 'regenerator-runtime/runtime';
 
-test('renders correctly', () => {
-  const tree = renderer.create(<App />).toJSON();
-  expect(tree).toMatchSnapshot();
+
+describe('Server methods are working', () => {
+  let server, agent;
+  beforeEach((done) => {
+      server = app.listen(7357, (err) => {
+        if (err) return done(err);
+        done();
+      });
+  });
+  afterEach((done) => {
+    server.close(done);
+  });
+  test('can retrieve course info with the /overview?:courseId endpoint', async (done) => {
+    request.get('/overview?courseId=1')
+      .expect('Content-Type', 'application/json; charset=utf-8')
+      .expect(200, done);
+  });
+  test('fails to retrieve info from /overview?:courseId with an invalid courseId', async (done) => {
+    const response = await request.get('/overview?courseId=0');
+    expect(response.status).toEqual(404);
+    done();
+  });
 });
 
-jest.mock('axios');
-
-
-test ('API endpoint returns mock data', async () => {
-  axios.get.mockResolvedValue(f.entry);
-  const data = await App.getOverview(1);
-  expect(data).toBe(f.entry);
-});
 
