@@ -95,7 +95,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "App", function() { return App; });
+/* WEBPACK VAR INJECTION */(function(module) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "App", function() { return App; });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
@@ -105,7 +105,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _components_Rating_jsx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Rating.jsx */ "./client/components/Rating.jsx");
-/* harmony import */ var _components_Rating_jsx__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_components_Rating_jsx__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _components_Subjects_jsx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Subjects.jsx */ "./client/components/Subjects.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -135,7 +134,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
 var App = /*#__PURE__*/function (_React$Component) {
   _inherits(App, _React$Component);
 
@@ -148,7 +146,12 @@ var App = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      overview: {}
+      overview: {},
+      review: {
+        average: 3.7,
+        total: 16384
+      } // hard-coded until API is running
+
     };
     return _this;
   }
@@ -162,7 +165,6 @@ var App = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.getOverview();
-      console.log(this.state);
     }
   }, {
     key: "getOverview",
@@ -172,12 +174,13 @@ var App = /*#__PURE__*/function (_React$Component) {
       var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.get("/overview/?courseId=".concat(id)).then(function (res) {
         var overview = res.data;
+        var review = _this2.state.review;
 
         _this2.setState({
-          overview: overview
-        });
+          overview: overview,
+          review: review
+        }); //will need further API calls here /-- these should be calls to external components
 
-        console.log(overview); //will need further API calls here -- these should be calls to external components
       });
     } //all data below will be re-factored to draw from state
 
@@ -187,7 +190,7 @@ var App = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "overview"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Subjects_jsx__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        subjects: this.state.subjects
+        subjects: this.state.overview.subjects
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "title"
       }, this.state.overview.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -197,6 +200,12 @@ var App = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
         id: "bestseller"
       }, "Bestseller")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "rating"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_components_Rating_jsx__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        average: this.state.review.average,
+        total: this.state.review.total,
+        students: this.state.overview.students
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "author"
       }, "Created by ", faker__WEBPACK_IMPORTED_MODULE_2___default.a.name.firstName(), " ", faker__WEBPACK_IMPORTED_MODULE_2___default.a.name.lastName()));
     }
@@ -204,9 +213,9 @@ var App = /*#__PURE__*/function (_React$Component) {
 
   return App;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
-
 react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('app'));
-
+module.exports = App;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../node_modules/webpack/buildin/harmony-module.js */ "./node_modules/webpack/buildin/harmony-module.js")(module)))
 
 /***/ }),
 
@@ -214,8 +223,68 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render( /*#__PURE__*/react__WEB
 /*!**************************************!*\
   !*** ./client/components/Rating.jsx ***!
   \**************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return Rating; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+ // Rating value of 3.7 chosen for now, to check code for half-stars
+
+var star = function star(fill) {
+  // 0 = empty, 0.5 = half, 1 = full
+  var fillings = ["black", "url(#halfstar)", "#FFC48C"];
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+    className: "star",
+    viewBox: "0 0 24 24",
+    width: "12",
+    beight: "12"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("defs", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("linearGradient", {
+    id: "halfstar"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("stop", {
+    offset: "50%",
+    "stop-color": "#FFC48C"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("stop", {
+    offset: "50%",
+    "stop-color": "black",
+    "stop-opacity": "1"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+    d: "M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z",
+    strokeWidth: "1",
+    stroke: "#FFC48C",
+    fill: fillings[Math.floor(fill * 2)]
+  }));
+};
+
+var numberWithCommas = function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+};
+
+var Rating = function Rating(props) {
+  var five = [0, 1, 2, 3, 4];
+  var starArray = five.map(function (num) {
+    if (props.average - num <= 0.2) {
+      return star(0);
+    }
+
+    if (props.average - num >= 0.8) {
+      return star(1);
+    }
+
+    return star(0.5);
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "rating"
+  }, props.average.toFixed(1), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "star-set"
+  }, starArray), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "reviews-total"
+  }, "(" + numberWithCommas(props.total) + " ratings)"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+    id: "students-total"
+  }, props.students ? numberWithCommas(props.students) : null, " students"));
+};
 
 
 
@@ -235,8 +304,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var Subjects = function Subjects(props) {
-  console.log('props', props);
-
   if (props.subjects) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
       className: "subject"
@@ -183972,6 +184039,41 @@ if (false) {} else {
 if (false) {} else {
   module.exports = __webpack_require__(/*! ./cjs/scheduler-tracing.development.js */ "./node_modules/scheduler/cjs/scheduler-tracing.development.js");
 }
+
+
+/***/ }),
+
+/***/ "./node_modules/webpack/buildin/harmony-module.js":
+/*!*******************************************!*\
+  !*** (webpack)/buildin/harmony-module.js ***!
+  \*******************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function(originalModule) {
+	if (!originalModule.webpackPolyfill) {
+		var module = Object.create(originalModule);
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		Object.defineProperty(module, "exports", {
+			enumerable: true
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
 
 
 /***/ }),
