@@ -22,10 +22,13 @@ export class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getOverview();
+    const regex = /\d+/;
+    let course = window.location.search.match(regex) === null ? 5 : window.location.search.match(regex)[0];
+    console.log(course);
+    this.getOverview(course);
   }
 
-  getOverview(id = 1) {
+  getOverview(id = 5) {
     axios.get(`/overview/?courseId=${id}`)
     .then((res) => {
       let overview = res.data;
