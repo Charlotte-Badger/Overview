@@ -9,7 +9,7 @@ const config = {
   ],
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: 'bundle.js'
+    filename: 'overview.js'
   },
   module: {
     rules: [
@@ -25,7 +25,8 @@ const config = {
       }
     ]
   },
-  target: "node"
+  target: "node",
+  watch: true
 };
 
 module.exports = config;
