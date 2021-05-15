@@ -5,7 +5,6 @@ app.use(express.static(__dirname + '/../public'));
 
 const port = 3000;
 
-
 app.get('/overview?:courseId', function(req, res) {
   let courseId = req.query.courseId;
   db.get(courseId, function(rec) {
@@ -28,6 +27,7 @@ app.get('/overview?:courseId', function(req, res) {
 
 app.listen(port, () => {
   console.log(`Server is listening at port ${port}`);
+
 });
 
 module.exports = app;
