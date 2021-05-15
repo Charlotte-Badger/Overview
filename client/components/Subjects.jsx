@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Subjects = (props) => {
-  console.log('props', props);
   if (props.subjects) {
     return (
       <div>
