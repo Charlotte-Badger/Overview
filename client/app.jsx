@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import faker from 'faker';
 import axios from 'axios';
 import Rating from './components/Rating.jsx';
-import Subjects from './components/Subjects.jsx';
+import Subjects from './components/Subjects.jsx'; 
 
 export class App extends React.Component {
   constructor(props) {
@@ -20,7 +20,6 @@ export class App extends React.Component {
   capitalize(string) {
     return string.slice(0, 1).toUpperCase() + string.slice(1);
   }
-
   componentDidMount() {
     this.getOverview();
   }
@@ -38,6 +37,7 @@ export class App extends React.Component {
     });
   }
   //all data below will be re-factored to draw from state
+
   render () {
     return (
       <div id="overview">
