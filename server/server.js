@@ -1,3 +1,4 @@
+const db = require('../database/overview.js');
 const express = require('express');
 const app = express();
 
@@ -21,8 +22,9 @@ app.get('/overview?:courseId', function(req, res) {
         "author": rec[0].author,
         "language": rec[0].language,
         "captions": rec[0].captions
-        });
+      });
     }
   });
+});
 
 module.exports = app;

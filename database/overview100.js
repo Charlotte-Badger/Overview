@@ -21,7 +21,7 @@ const create = function() {
       captions.push(lang[rand]);
     }
     data.push({
-      "_id": i,
+      "courseId": i,
       "title": faker.company.catchPhrase(), // this may actually be fetched from course content API instead -- TBD
       "tagline": capitalize(faker.hacker.ingverb()) + ' the ' + faker.hacker.adjective() + ' ' + faker.hacker.noun(),
       "students": Math.floor((Math.random() * 90000)) + 10000,
