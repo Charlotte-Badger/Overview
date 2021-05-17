@@ -31,5 +31,3 @@ app.get('/overview?:courseId', function(req, res) {
 });
 
 module.exports = app;
-
-//
