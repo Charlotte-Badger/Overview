@@ -25,9 +25,4 @@ app.get('/overview?:courseId', function(req, res) {
     }
   });
 
-app.listen(port, () => {
-  console.log(`Server is listening at port ${port}`);
-
-});
-
 module.exports = app;
