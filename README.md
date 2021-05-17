@@ -1,13 +1,8 @@
 # Project Name
 
-> Project description
+Overview
 
-## Related Projects
 
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
-  - https://github.com/teamName/repo
 
 ## Table of Contents
 
@@ -17,7 +12,18 @@
 
 ## Usage
 
-> Some usage instructions
+To seed database:
+```sh
+npm run fake100
+```
+To create bundle:
+```sh
+npm run build
+```
+To start server:
+```sh
+npm run start
+```
 
 ## Requirements
 
@@ -25,8 +31,6 @@ An `nvmrc` file is included if using [nvm](https://github.com/creationix/nvm).
 
 - Node 6.13.0
 - etc
-
-## Development
 
 ### Installing Dependencies
 

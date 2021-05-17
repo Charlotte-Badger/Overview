@@ -1,9 +1,5 @@
 const express = require('express');
 const app = express();
-const path = require('path');
-const db = require('../database/overview.js');
-const $ = require('jquery');
-
 
 app.use(express.static(__dirname + '/../public'));
 
@@ -28,6 +24,10 @@ app.get('/overview?:courseId', function(req, res) {
         });
     }
   });
+
+app.listen(port, () => {
+  console.log(`Server is listening at port ${port}`);
+
 });
 
 module.exports = app;
