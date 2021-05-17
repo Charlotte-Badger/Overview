@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import faker from 'faker';
 import axios from 'axios';
 import Rating from './components/Rating.jsx';
-import Subjects from './components/Subjects.jsx'; 
+import Subjects from './components/Subjects.jsx';
 
 export class App extends React.Component {
   constructor(props) {
@@ -62,4 +62,4 @@ export class App extends React.Component {
 
 ReactDOM.render(<App />, document.getElementById('app'));
 
-module.exports = App;
+export default App;
