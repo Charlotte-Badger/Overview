@@ -13,6 +13,7 @@ let overviewSchema = new mongoose.Schema({
   "title": String, // this may actually be fetched from course content API instead -- TBD
   "tagline": String,
   "students": Number,
+  "subjects": [String],
   "author": Number, // external ID
   "thumbnail": String,
   "language": String,
@@ -28,6 +29,7 @@ let save = (records) => {
       title: record.title,
       tagline: record.tagline,
       students: record.students,
+      subjects: record.subjects,
       author: record.author,
       thumbnail: record.thumbnail,
       language: record.language,
