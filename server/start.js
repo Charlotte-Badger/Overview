@@ -1,8 +1,8 @@
 const app = require('./server.js');
-const port = 3000;
+const PORT = process.env.PORT || 3000;
 
 const serverInstance = app.listen(port, () => {
-  console.log(`Overview is listening at http://localhost:${port}`)
+  console.log(`Overview is listening at port ${PORT}`)
 });
 
 const closeServer = () => {
