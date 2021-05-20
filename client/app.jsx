@@ -63,7 +63,7 @@ const AuthorName = styled.span`
   display:inline;
   `;
 
-class App extends React.Component {
+class Overview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -116,6 +116,6 @@ class App extends React.Component {
   };
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<Overview />, document.getElementById('overview'));
 
-export default App;
+export default Overview;
