@@ -1,10 +1,10 @@
 const db = require('../database/overview.js');
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
+app.use(cors());
 app.use(express.static(__dirname + '/../public'));
-
-const port = 3000;
 
 app.get('/overview?:courseId', function(req, res) {
   let courseId = req.query.courseId;
