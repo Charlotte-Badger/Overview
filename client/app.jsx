@@ -1,12 +1,13 @@
 import axios from 'axios';
-import faker from 'faker';
 import Rating from './components/Rating.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
+//import Gift from 'styled-components';
 import Subjects from './components/Subjects.jsx';
 import Wishlist from './components/Wishlist.jsx';
 import Share from './components/Share.jsx';
+import ShareModal from './components/ShareModal.jsx'
 import moment from 'moment';
 import { BodyWrapper, Title, Tagline, BestBox, Bestseller, RatingWrapper,AuthorWrapper, AuthorName, TrailingInfo, SmallIcon, InfoText, UpdatedIcon, GlobeIcon, CCIcon } from './components/Styles.jsx';
 
@@ -21,8 +22,10 @@ class Overview extends React.Component {
         average: 0,
         total: 0
       },
-      updatedAt: '1-1-2021'
+      updatedAt: '1-1-2021',
+      showModal: false
     };
+    this.shareClick = this.shareClick.bind(this);
   }
 
   componentDidMount() {
@@ -41,7 +44,6 @@ class Overview extends React.Component {
         this.setState({
           overview: overview
         });
-        //will need further API calls here /-- these should be calls to external components
       })
       .then(() => {
         axios.get(`http://localhost:2712/reviews/item?courseId=${id}`)
@@ -71,9 +73,19 @@ class Overview extends React.Component {
       .catch((err) => console.log(err));
   }
 
+  shareClick (e) {
+    if (e.target.id.indexOf('share') !== -1) {
+      console.log('Clicked');
+      this.setState({
+        showModal: true
+      })
+    }
+  }
+
   render () {
     return (
       <BodyWrapper>
+        <ShareModal showModal={this.state.showModal} handleClick={this.shareClick} />
         <div><Subjects subjects={this.state.overview.subjects} /></div>
         <Title>{this.state.overview.title}</Title>
         <Tagline>{this.state.overview.tagline}</Tagline>
@@ -99,7 +111,8 @@ class Overview extends React.Component {
           <InfoText>{this.state.overview.captions ? this.state.overview.captions.join(', ') : null}</InfoText>
         </TrailingInfo>
         <Wishlist />
-        <Share />
+        <Share handleClick={this.shareClick} />
+        {/*<Gift /*/}
       </BodyWrapper>
     );
   }

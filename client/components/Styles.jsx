@@ -110,7 +110,7 @@ export const WishlistButton = styled.button`
   position: relative;
   color: white;
   height: 40px;
-  width: 49%;
+  width: 20%;
   border: 1px solid white;
   font-weight: 700;
   background: black;
@@ -126,7 +126,7 @@ export const WishlistButton = styled.button`
   position: relative;
   color: white;
   height: 40px;
-  width: 49%;
+  width: 20%;
   border: 1px solid white;
   font-weight: 700;
   background: black;
