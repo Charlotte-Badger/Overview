@@ -38,7 +38,7 @@ const Closer = styled.span`
 
 const ShareModal = (props) => {
   return (
-    <ModalWrapper>
+    <ModalWrapper showModal={props.showModal}>
       <ModalContent>
         <Closer dangerouslySetInnerHTML={{__html: '$times;'}}></Closer>
         <div>Testing</div>
