@@ -203,6 +203,96 @@ export const IconNext = styled.svg`
   width: 14px;
 `;
 
+export const ModalWrapper = styled.div`
+    display: ${props => props.showModal ? 'block' : 'none'};
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: black;
+    background-color: rgba(0,0,0,0.4);
+    `;
+
+export const ModalContent = styled.div`
+  background-color: white;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid black;
+  border-radius: 8px;
+  width 50%;
+  position: absolute;
+  left: 50%;
+  top: 40%;
+  transform: translate(-50%, -60%);
+    `;
+
+export const Closer = styled.span`
+  color: grey;
+  float: right;
+  display: inline;
+  font-size: 28px;
+  font-weight: 300px;
+  &:hover {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  `;
+
+export const ModalHeader = styled.h2`
+  color: black;
+  font-weight: 600;
+  line-height: 1.2;
+  font-size: 20px;
+  letter-spacing: -.02rem;
+  font-family: "sf pro display", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  `;
+
+export const ModalBox = styled.div`
+  width: 100%;
+  height: 48px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: cyan;
+  `;
+
+export const ShareHtml = styled.input`
+  border-top-left-radius: 4px;
+  font-size: 14px;
+  font-family: "sf pro display", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-weight: 300;
+  border-bottom-left-radius: 4px;
+  border: 1px solid grey;
+  height: 100%;
+  width: 80%;
+  background-color: white;
+  `;
+
+export const ShareCopy = styled.button`
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "sf pro display", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  display: inline;
+  color: white;
+  font-weight: 600;
+  border-top=right-radius: 4px;
+  border-bottom-right-radius: 4px;
+  background-color: #0f7c90;
+  margin: auto;
+  height: 100%;
+  width: 20%;
+  border: 1px solid grey;
+  &:hover {
+    background-color: #083e48;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  `;
+
 export const Arrow = (
   <path d="M8.59 7.41L13.17 12l-4.58 4.59L10 18l6-6-6-6-1.41 1.41z"></path>
 );
@@ -245,5 +335,5 @@ export const HeartPath = (filling) => {
 };
 
 export const SharePath = (
-<path d="M23.25 10.75L14.5 2v5C5.75 8.25 2 14.5.75 20.75c3.125-4.375 7.5-6.375 13.75-6.375V19.5l8.75-8.75z" fill="white"></path>
+<path d="M23.25 10.75L14.5 2v5C5.75 8.25 2 14.5.75 20.75c3.125-4.375 7.5-6.375 13.75-6.375V19.5l8.75-8.75z" fill="white" id="share5"></path>
 );

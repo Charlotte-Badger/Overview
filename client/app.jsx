@@ -74,10 +74,15 @@ class Overview extends React.Component {
   }
 
   shareClick (e) {
+    console.log(e.target);
     if (e.target.id.indexOf('share') !== -1) {
-      console.log('Clicked');
       this.setState({
         showModal: true
+      })
+    }
+    if (e.target.id.indexOf('close') !== -1 && this.state.showModal) {
+      this.setState({
+        showModal: false
       })
     }
   }
