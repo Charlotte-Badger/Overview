@@ -21,7 +21,7 @@ class Wishlist extends React.Component {
     return (
       <WishlistButton onClick={this.wishClick}>
         <WishContents>
-          <WishAdd>Add to Wishlist</WishAdd>
+          <WishAdd>Wishlist</WishAdd>
           <svg width="18px" height="18px" color="white">
             <HeartIcon viewBox="0 0 24 24">
               {HeartPath(this.state.wishlist)}

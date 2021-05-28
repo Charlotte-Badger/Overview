@@ -46,7 +46,7 @@ class Overview extends React.Component {
         });
       })
       .then(() => {
-        axios.get(`http://localhost:2712/reviews/item?courseId=${id}`)
+        axios.get(`http://ec2-54-176-79-167.us-west-1.compute.amazonaws.com:2712/reviews/item?courseId=${id}`)
         .then((res) => {
           console.log(res.data);
           let overallRating = res.data.ratings.overallRating;
@@ -94,7 +94,7 @@ class Overview extends React.Component {
         <div><Subjects subjects={this.state.overview.subjects} /></div>
         <Title>{this.state.overview.title}</Title>
         <Tagline>{this.state.overview.tagline}</Tagline>
-        <BestBox><Bestseller>Bestseller</Bestseller></BestBox>
+        <BestBox id="best"><Bestseller>Bestseller</Bestseller></BestBox>
         <RatingWrapper><Rating average={this.state.review.average} total={this.state.review.total} students={this.state.overview.students} /></RatingWrapper>
         <AuthorWrapper>Created by <AuthorName>Constanza Nomina</AuthorName></AuthorWrapper>
         <TrailingInfo>
