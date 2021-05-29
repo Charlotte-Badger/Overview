@@ -26,7 +26,7 @@ export const Tagline = styled.div`
   `;
 
 export const BestBox = styled.div`
-  display:inline;
+  display: ${props => props.showBest ? 'inline' : 'none'};;
   `;
 
 export const Bestseller = styled.span`
@@ -35,7 +35,7 @@ export const Bestseller = styled.span`
   font-family:"sf pro display", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   padding: 4px 8px;
   border-radius:7%;
-  display:inline;
+  display: inline;
   `;
 
 export const RatingWrapper = styled.div`

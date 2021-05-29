@@ -11,7 +11,7 @@ import ShareModal from './components/ShareModal.jsx'
 import moment from 'moment';
 import { BodyWrapper, Title, Tagline, BestBox, Bestseller, RatingWrapper,AuthorWrapper, AuthorName, TrailingInfo, SmallIcon, InfoText, UpdatedIcon, GlobeIcon, CCIcon } from './components/Styles.jsx';
 
-
+const bestseller = (average, ratings, total) => average >= 3.7 && ratings >= 50 && total >= 50000;
 
 class Overview extends React.Component {
   constructor(props) {
@@ -94,7 +94,7 @@ class Overview extends React.Component {
         <div><Subjects subjects={this.state.overview.subjects} /></div>
         <Title>{this.state.overview.title}</Title>
         <Tagline>{this.state.overview.tagline}</Tagline>
-        <BestBox id="best"><Bestseller>Bestseller</Bestseller></BestBox>
+        <BestBox id="best" showBest={bestseller(this.state.review.average, this.state.review.total, this.state.overview.students)}><Bestseller>Bestseller</Bestseller></BestBox>
         <RatingWrapper><Rating average={this.state.review.average} total={this.state.review.total} students={this.state.overview.students} /></RatingWrapper>
         <AuthorWrapper>Created by <AuthorName>Constanza Nomina</AuthorName></AuthorWrapper>
         <TrailingInfo>
