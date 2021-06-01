@@ -3,7 +3,8 @@ import styled from 'styled-components';
 
 export const BodyWrapper = styled.div`
   background-color: black;
-  padding: 10px;
+  margin: auto;
+  padding: 5%;
   `;
 
 export const Title = styled.h1`
@@ -70,6 +71,8 @@ export const TrailingInfo = styled.div`
 
 export const SmallIcon = styled.svg`
   width: 14px;
+  height: auto;
+  padding-top: 4px;
   box-sizing: border-box;
   display: inline;
   `;
@@ -112,6 +115,24 @@ export const WishlistButton = styled.button`
   height: 40px;
   width: 20%;
   border: 1px solid white;
+  margin: 8px;
+  font-weight: 700;
+  background: black;
+  text-align: center;
+  align-items: center;
+  border-radius: 4px;
+  display: inline-flex;
+  min-width: 10rem;
+  padding: 0 1.2rem;
+  `;
+
+export const GiftButton = styled.button`
+  position: relative;
+  color: white;
+  height: 40px;
+  width: 20%;
+  border: 1px solid white;
+  margin: 8px;
   font-weight: 700;
   background: black;
   text-align: center;
@@ -147,7 +168,16 @@ export const WishContents = styled.div`
   display: flex;
   `;
 
-export const ShareContents = styled.div`
+export const GiftContents = styled.div`
+  height: 40px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  display: flex;
+  `;
+
+export const ShareContents = styled.span`
   height: 40px;
   align-items: center;
   margin-left: auto;
@@ -164,6 +194,10 @@ export const WishAdd = styled.div`
 export const ShareText = styled.div`
   display: flex;
   margin-right: 10px;
+  `;
+
+export const GiftText = styled.div`
+  display: flex;
   `;
 
 export const HeartIcon = styled.svg`
@@ -254,10 +288,11 @@ export const ModalHeader = styled.h2`
 
 export const ModalBox = styled.div`
   width: 100%;
-  height: 48px;
+  height: 40px;
   border-radius: 4px;
   box-sizing: border-box;
-  background-color: cyan;
+  background-color: white;
+
   `;
 
 export const ShareHtml = styled.input`
@@ -267,8 +302,9 @@ export const ShareHtml = styled.input`
   font-weight: 300;
   border-bottom-left-radius: 4px;
   border: 1px solid grey;
-  height: 100%;
-  width: 80%;
+  height: 40px;
+  width: 78%;
+  display: inline;
   background-color: white;
   `;
 
@@ -283,7 +319,7 @@ export const ShareCopy = styled.button`
   border-bottom-right-radius: 4px;
   background-color: #0f7c90;
   margin: auto;
-  height: 100%;
+  height: 43px;
   width: 20%;
   border: 1px solid grey;
   &:hover {

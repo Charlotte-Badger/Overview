@@ -8,6 +8,7 @@ import Subjects from './components/Subjects.jsx';
 import Wishlist from './components/Wishlist.jsx';
 import Share from './components/Share.jsx';
 import ShareModal from './components/ShareModal.jsx'
+import Gift from './components/Gift.jsx';
 import moment from 'moment';
 import { BodyWrapper, Title, Tagline, BestBox, Bestseller, RatingWrapper,AuthorWrapper, AuthorName, TrailingInfo, SmallIcon, InfoText, UpdatedIcon, GlobeIcon, CCIcon } from './components/Styles.jsx';
 
@@ -117,7 +118,7 @@ class Overview extends React.Component {
         </TrailingInfo>
         <Wishlist />
         <Share handleClick={this.shareClick} />
-        {/*<Gift /*/}
+        <Gift />
       </BodyWrapper>
     );
   }
