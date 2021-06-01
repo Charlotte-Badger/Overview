@@ -6,7 +6,7 @@ const app = express();
 app.use(cors());
 app.use(express.static(__dirname + '/../public'));
 
-app.get('/overview?:courseId', function(req, res) {
+app.get('http://ec2-54-234-67-3.compute-1.amazonaws.com:3000/overview?:courseId', function(req, res) {
   let courseId = req.query.courseId;
   db.get(courseId, function(rec) {
     console.log(rec);
