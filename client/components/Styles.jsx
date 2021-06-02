@@ -315,11 +315,11 @@ export const ShareCopy = styled.button`
   display: inline;
   color: white;
   font-weight: 600;
-  border-top=right-radius: 4px;
+  border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
   background-color: #0f7c90;
   margin: auto;
-  height: 43px;
+  height: 44px;
   width: 20%;
   border: 1px solid grey;
   &:hover {
