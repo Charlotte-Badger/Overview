@@ -38,7 +38,7 @@ class Overview extends React.Component {
   }
 
   getOverview(id = 5) {
-    axios.get(`http://localhost:3000/overview/?courseId=${id}`)
+    axios.get(`http://ec2-54-234-67-3.compute-1.amazonaws.com:3000/overview/?courseId=${id}`)
       .then((res) => {
         let overview = res.data;
         let review = this.state.review;
