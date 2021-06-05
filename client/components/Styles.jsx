@@ -3,8 +3,6 @@ import styled from 'styled-components';
 
 export const BodyWrapper = styled.div`
   background-color: black;
-  margin: auto;
-  padding: 5%;
   `;
 
 export const Title = styled.h1`
