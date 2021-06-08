@@ -25,11 +25,12 @@ const Rating = (props) => {
   return (
     <RatingInternalWrapper>
       {props.average.toFixed(1)}
-      <StarSet>{starArray}</StarSet>
-      <Total>{"(" + numberWithCommas(props.total) + " ratings)"}</Total>
+      <StarSet>{props.condensed ? star(1, 1) : starArray}</StarSet>
+      <Total>{"(" + numberWithCommas(props.total) + (props.condensed ? ")" : " ratings)")}</Total>
       <Total>{props.students ? numberWithCommas(props.students) : null} students</Total>
     </RatingInternalWrapper>
   )
 };
 
 export { Rating as default };
+export { star };

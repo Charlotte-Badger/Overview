@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 export const BodyWrapper = styled.div`
-  background-color: black;
+  background-color: #1e1e1c;
+  margin-top: 86px;
+  margin-right: 0px;
+  margin-left: 0px;
   `;
 
 export const Title = styled.h1`
@@ -31,6 +34,7 @@ export const BestBox = styled.div`
 export const Bestseller = styled.span`
   background-color: #FFE799;
   font-size:12px;
+  color: black;
   font-family:"sf pro display", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   padding: 4px 8px;
   border-radius:7%;
@@ -52,7 +56,7 @@ export const AuthorWrapper = styled.div`
   margin-bottom:16px;
   `;
 
-export const AuthorName = styled.span`
+export const AuthorName = styled.a`
   color: #8ED1DC;
   text-decoration: underline;
   display:inline;
@@ -65,6 +69,9 @@ export const TrailingInfo = styled.div`
   font-weight:250;
   margin-top: 16px;
   margin-bottom: 16px;
+  margin-right: 14px;
+  display: inline-block;
+  word-wrap: normal;
   `;
 
 export const SmallIcon = styled.svg`
@@ -73,6 +80,7 @@ export const SmallIcon = styled.svg`
   padding-top: 4px;
   box-sizing: border-box;
   display: inline;
+  vertical-align: -2px;
   `;
 
 export const InfoText = styled.span`
@@ -115,7 +123,7 @@ export const WishlistButton = styled.button`
   border: 1px solid white;
   margin: 8px;
   font-weight: 700;
-  background: black;
+  background: transparent;
   text-align: center;
   align-items: center;
   border-radius: 4px;
@@ -132,13 +140,17 @@ export const GiftButton = styled.button`
   border: 1px solid white;
   margin: 8px;
   font-weight: 700;
-  background: black;
+  background: transparent;
   text-align: center;
   align-items: center;
   border-radius: 4px;
   display: inline-flex;
   min-width: 10rem;
   padding: 0 1.2rem;
+  `;
+
+  export const ButtonWrapper = styled.div`
+  display: block;
   `;
 
   export const ShareButton = styled.button`
@@ -148,7 +160,7 @@ export const GiftButton = styled.button`
   width: 20%;
   border: 1px solid white;
   font-weight: 700;
-  background: black;
+  background: transparent;
   text-align: center;
   align-items: center;
   border-radius: 4px;
@@ -213,12 +225,13 @@ export const ShareArrow = styled.svg`
   display: inline;
   `;
 
-export const Subject = styled.div`
+export const Subject = styled.a`
   font-family: "sf pro display", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 14px;
   font-weight: bold;
   color: #8ED1DC;
   display:inline;
+  text-decoration: none;
 `;
 
 export const Pointer = styled.div`
@@ -238,7 +251,7 @@ export const IconNext = styled.svg`
 export const ModalWrapper = styled.div`
     display: ${props => props.showModal ? 'block' : 'none'};
     position: fixed;
-    z-index: 1;
+    z-index: 2000;
     padding-top: 100px;
     left: 0;
     top: 0;
@@ -327,6 +340,33 @@ export const ShareCopy = styled.button`
   }
   `;
 
+export const InfobarWrapper = styled.div`
+  background-color: #1e1e1c;
+  color: white;
+  font-family: "sf pro display", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, .08), 0 -4px 12px rgba(0, 0, 0, .16);
+  margin: auto;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  display: block;
+  `;
+
+export const InfobarTitle = styled.div`
+  font-weight: 600;
+  font-size: 0.8 rem;
+  letter-spacing: 0.03rem;
+  margin-bottom: 8px;
+  `;
+
+
 export const Arrow = (
   <path d="M8.59 7.41L13.17 12l-4.58 4.59L10 18l6-6-6-6-1.41 1.41z"></path>
 );
@@ -363,7 +403,7 @@ export const StarDisp = function (fill, num) {
 
 export const HeartPath = (filling) => {
   return (
-  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" strokeWidth="2" stroke="white" fill={filling ? "red" : "black"}>
+  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" strokeWidth="2" stroke="white" fill={filling ? "red" : "transparent"}>
   </path>
   );
 };

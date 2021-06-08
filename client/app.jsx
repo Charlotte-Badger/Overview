@@ -1,16 +1,16 @@
 import axios from 'axios';
+import Gift from './components/Gift.jsx';
+import Infobar from './components/Infobar.jsx';
+import moment from 'moment';
 import Rating from './components/Rating.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import styled from 'styled-components';
-//import Gift from 'styled-components';
-import Subjects from './components/Subjects.jsx';
-import Wishlist from './components/Wishlist.jsx';
 import Share from './components/Share.jsx';
 import ShareModal from './components/ShareModal.jsx'
-import Gift from './components/Gift.jsx';
-import moment from 'moment';
-import { BodyWrapper, Title, Tagline, BestBox, Bestseller, RatingWrapper,AuthorWrapper, AuthorName, TrailingInfo, SmallIcon, InfoText, UpdatedIcon, GlobeIcon, CCIcon } from './components/Styles.jsx';
+import styled from 'styled-components';
+import Subjects from './components/Subjects.jsx';
+import Wishlist from './components/Wishlist.jsx';
+import { BodyWrapper, Title, Tagline, BestBox, Bestseller, RatingWrapper,AuthorWrapper, AuthorName, TrailingInfo, SmallIcon, InfoText, UpdatedIcon, GlobeIcon, CCIcon, ButtonWrapper } from './components/Styles.jsx';
 
 const bestseller = (average, ratings, total) => average >= 3.7 && ratings >= 50 && total >= 50000;
 
@@ -24,9 +24,11 @@ class Overview extends React.Component {
         total: 0
       },
       updatedAt: '1-1-2021',
-      showModal: false
+      showModal: false,
+      captionsExpanded: false
     };
     this.shareClick = this.shareClick.bind(this);
+    this.captionsClick = this.captionsClick.bind(this);
   }
 
   componentDidMount() {
@@ -47,7 +49,7 @@ class Overview extends React.Component {
         });
       })
       .then(() => {
-        axios.get(`http://ec2-54-176-79-167.us-west-1.compute.amazonaws.com:2712/reviews/item?courseId=${id}`)
+        axios.get(`http://ec2-18-144-171-42.us-west-1.compute.amazonaws.com:2712/reviews/item?courseId=${id}`)
         .then((res) => {
           console.log(res.data);
           let overallRating = res.data.ratings.overallRating;
@@ -88,37 +90,50 @@ class Overview extends React.Component {
     }
   }
 
+  captionsClick () {
+    this.setState({captionsExpanded: true});
+  }
+
+  captionSpan () {
+    return (
+      <span>, <span text-decoration="underline" onClick={this.captionsClick}>4 more</span></span>
+    );
+  }
+
   render () {
     return (
       <BodyWrapper>
+        <Infobar title={this.state.overview.title} showBest={bestseller(this.state.review.average, this.state.review.total, this.state.overview.students)} average={this.state.review.average} total={this.state.review.total} students={this.state.overview.students} />
         <ShareModal showModal={this.state.showModal} handleClick={this.shareClick} />
         <div><Subjects subjects={this.state.overview.subjects} /></div>
         <Title>{this.state.overview.title}</Title>
         <Tagline>{this.state.overview.tagline}</Tagline>
         <BestBox id="best" showBest={bestseller(this.state.review.average, this.state.review.total, this.state.overview.students)}><Bestseller>Bestseller</Bestseller></BestBox>
-        <RatingWrapper><Rating average={this.state.review.average} total={this.state.review.total} students={this.state.overview.students} /></RatingWrapper>
-        <AuthorWrapper>Created by <AuthorName>Constanza Nomina</AuthorName></AuthorWrapper>
-        <TrailingInfo>
-          <SmallIcon viewBox="0 0 24 24">
-            {UpdatedIcon}
-          </SmallIcon>
-          <InfoText>Last updated {moment(this.state.updatedAt).format('M/YYYY')}</InfoText>
-        </TrailingInfo>
-        <TrailingInfo>
-          <SmallIcon viewBox="0 0 24 24">
-            {GlobeIcon}
-          </SmallIcon>
-          <InfoText>{this.state.overview.language}</InfoText>
-        </TrailingInfo>
-        <TrailingInfo>
-          <SmallIcon viewBox="0 0 24 24">
-            {CCIcon}
-          </SmallIcon>
-          <InfoText>{this.state.overview.captions ? this.state.overview.captions.join(', ') : null}</InfoText>
-        </TrailingInfo>
-        <Wishlist />
-        <Share handleClick={this.shareClick} />
-        <Gift />
+        <RatingWrapper><Rating average={this.state.review.average} total={this.state.review.total} students={this.state.overview.students} condensed={false} /></RatingWrapper>
+        <AuthorWrapper>Created by <AuthorName href="#author">Constanza Nomina</AuthorName></AuthorWrapper>
+          <TrailingInfo>
+            <SmallIcon margin-bottom="4px" viewBox="0 0 24 24">
+              {UpdatedIcon}
+            </SmallIcon>
+            <InfoText>Last updated {moment(this.state.updatedAt).format('M/YYYY')}</InfoText>
+          </TrailingInfo>
+          <TrailingInfo>
+            <SmallIcon viewBox="0 0 24 24">
+              {GlobeIcon}
+            </SmallIcon>
+            <InfoText>{this.state.overview.language}</InfoText>
+          </TrailingInfo>
+          <TrailingInfo>
+            <SmallIcon viewBox="0 0 24 24">
+              {CCIcon}
+            </SmallIcon>
+            <InfoText>{this.state.overview.captions ? (this.state.captionsExpanded ? this.state.overview.captions.join(', ') : this.state.overview.captions.slice(0, 2).join(', ') + ', ' + this.captionSpan()) : null}</InfoText>
+          </TrailingInfo>
+        <ButtonWrapper>
+          <Wishlist />
+          <Share handleClick={this.shareClick} />
+          <Gift />
+        </ButtonWrapper>
       </BodyWrapper>
     );
   }
