@@ -13,6 +13,6 @@ const Gift = (props) => {
       </GiftButton>
     </a>
   );
-}
+};
 
 export default Gift;

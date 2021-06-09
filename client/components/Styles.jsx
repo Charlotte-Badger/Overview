@@ -149,11 +149,11 @@ export const GiftButton = styled.button`
   padding: 0 1.2rem;
   `;
 
-  export const ButtonWrapper = styled.div`
+export const ButtonWrapper = styled.div`
   display: block;
   `;
 
-  export const ShareButton = styled.button`
+export const ShareButton = styled.button`
   position: relative;
   color: white;
   height: 40px;
@@ -350,8 +350,8 @@ export const InfobarWrapper = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 15px;
+  padding-bottom: 15px;
   position: fixed;
   top: 0;
   width: 100%;
@@ -387,27 +387,27 @@ export const CCIcon = (
 );
 
 export const StarDisp = function (fill, num) {
-  const fillings = ["black", "url(#halfstar)", "#FFC48C"];
+  const fillings = ['black', 'url(#halfstar)', '#FFC48C'];
   return (
     <StarIcon key={num} viewBox="0 0 24 24" width="12" beight="12">
       <defs>
         <linearGradient id="halfstar">
-            <stop offset="50%" stopColor="#FFC48C"/>
-            <stop offset="50%" stopColor="black" stopOpacity="1" />
+          <stop offset="50%" stopColor="#FFC48C"/>
+          <stop offset="50%" stopColor="black" stopOpacity="1" />
         </linearGradient>
       </defs>
       <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z" strokeWidth="1" stroke="#FFC48C" fill={fillings[Math.floor(fill * 2)]}></path>
     </StarIcon>
-    )
-}
+  );
+};
 
 export const HeartPath = (filling) => {
   return (
-  <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" strokeWidth="2" stroke="white" fill={filling ? "red" : "transparent"}>
-  </path>
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" strokeWidth="2" stroke="white" fill={filling ? 'red' : 'transparent'}>
+    </path>
   );
 };
 
 export const SharePath = (
-<path d="M23.25 10.75L14.5 2v5C5.75 8.25 2 14.5.75 20.75c3.125-4.375 7.5-6.375 13.75-6.375V19.5l8.75-8.75z" fill="white" id="share5"></path>
+  <path d="M23.25 10.75L14.5 2v5C5.75 8.25 2 14.5.75 20.75c3.125-4.375 7.5-6.375 13.75-6.375V19.5l8.75-8.75z" fill="white" id="share5"></path>
 );

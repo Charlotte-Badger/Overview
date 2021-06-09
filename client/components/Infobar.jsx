@@ -14,7 +14,7 @@ const Infobar = (props) => {
       <BestBox id="infobest" showBest={bestseller(props.average, props.total, props.students)}><Bestseller>Bestseller</Bestseller></BestBox>
       <RatingWrapper><Rating average={props.average} total={props.total} students={props.students} condensed={true}/></RatingWrapper>
     </InfobarWrapper>
-  )
-}
+  );
+};
 
 export { Infobar as default };

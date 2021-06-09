@@ -15,6 +15,6 @@ const Share = (props) => {
       </ShareContents>
     </ShareButton>
   );
-}
+};
 
 export default Share;

@@ -6,11 +6,11 @@ import Rating from './components/Rating.jsx';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import Share from './components/Share.jsx';
-import ShareModal from './components/ShareModal.jsx'
+import ShareModal from './components/ShareModal.jsx';
 import styled from 'styled-components';
 import Subjects from './components/Subjects.jsx';
 import Wishlist from './components/Wishlist.jsx';
-import { BodyWrapper, Title, Tagline, BestBox, Bestseller, RatingWrapper,AuthorWrapper, AuthorName, TrailingInfo, SmallIcon, InfoText, UpdatedIcon, GlobeIcon, CCIcon, ButtonWrapper } from './components/Styles.jsx';
+import { BodyWrapper, Title, Tagline, BestBox, Bestseller, RatingWrapper, AuthorWrapper, AuthorName, TrailingInfo, SmallIcon, InfoText, UpdatedIcon, GlobeIcon, CCIcon, ButtonWrapper } from './components/Styles.jsx';
 
 const bestseller = (average, ratings, total) => average >= 3.7 && ratings >= 50 && total >= 50000;
 
@@ -50,28 +50,28 @@ class Overview extends React.Component {
       })
       .then(() => {
         axios.get(`http://ec2-18-144-171-42.us-west-1.compute.amazonaws.com:2712/reviews/item?courseId=${id}`)
-        .then((res) => {
-          console.log(res.data);
-          let overallRating = res.data.ratings.overallRating;
-          let totalRatings = res.data.ratings.totalRatings;
-          this.setState({
-            review: {
-              average: overallRating,
-              total: totalRatings
-            }
-          });
-        })
-        .then(() => {
-          axios.get(`http://ec2-18-130-234-175.eu-west-2.compute.amazonaws.com:9800/course/item?courseId=${id}`)
           .then((res) => {
-            let updatedAt = res.data.updatedAt;
+            console.log(res.data);
+            let overallRating = res.data.ratings.overallRating;
+            let totalRatings = res.data.ratings.totalRatings;
             this.setState({
-              updatedAt: updatedAt
+              review: {
+                average: overallRating,
+                total: totalRatings
+              }
             });
           })
+          .then(() => {
+            axios.get(`http://ec2-18-130-234-175.eu-west-2.compute.amazonaws.com:9800/course/item?courseId=${id}`)
+              .then((res) => {
+                let updatedAt = res.data.updatedAt;
+                this.setState({
+                  updatedAt: updatedAt
+                });
+              })
+              .catch((err) => console.log(err));
+          })
           .catch((err) => console.log(err));
-        })
-        .catch((err) => console.log(err));
       })
       .catch((err) => console.log(err));
   }
@@ -81,12 +81,12 @@ class Overview extends React.Component {
     if (e.target.id.indexOf('share') !== -1) {
       this.setState({
         showModal: true
-      })
+      });
     }
     if (e.target.id.indexOf('close') !== -1 && this.state.showModal) {
       this.setState({
         showModal: false
-      })
+      });
     }
   }
 
@@ -111,24 +111,24 @@ class Overview extends React.Component {
         <BestBox id="best" showBest={bestseller(this.state.review.average, this.state.review.total, this.state.overview.students)}><Bestseller>Bestseller</Bestseller></BestBox>
         <RatingWrapper><Rating average={this.state.review.average} total={this.state.review.total} students={this.state.overview.students} condensed={false} /></RatingWrapper>
         <AuthorWrapper>Created by <AuthorName href="#author">Constanza Nomina</AuthorName></AuthorWrapper>
-          <TrailingInfo>
-            <SmallIcon margin-bottom="4px" viewBox="0 0 24 24">
-              {UpdatedIcon}
-            </SmallIcon>
-            <InfoText>Last updated {moment(this.state.updatedAt).format('M/YYYY')}</InfoText>
-          </TrailingInfo>
-          <TrailingInfo>
-            <SmallIcon viewBox="0 0 24 24">
-              {GlobeIcon}
-            </SmallIcon>
-            <InfoText>{this.state.overview.language}</InfoText>
-          </TrailingInfo>
-          <TrailingInfo>
-            <SmallIcon viewBox="0 0 24 24">
-              {CCIcon}
-            </SmallIcon>
-            <InfoText>{this.state.overview.captions ? (this.state.captionsExpanded ? this.state.overview.captions.join(', ') : this.state.overview.captions.slice(0, 2).join(', ') + ', ' + this.captionSpan()) : null}</InfoText>
-          </TrailingInfo>
+        <TrailingInfo>
+          <SmallIcon margin-bottom="4px" viewBox="0 0 24 24">
+            {UpdatedIcon}
+          </SmallIcon>
+          <InfoText>Last updated {moment(this.state.updatedAt).format('M/YYYY')}</InfoText>
+        </TrailingInfo>
+        <TrailingInfo>
+          <SmallIcon viewBox="0 0 24 24">
+            {GlobeIcon}
+          </SmallIcon>
+          <InfoText>{this.state.overview.language}</InfoText>
+        </TrailingInfo>
+        <TrailingInfo>
+          <SmallIcon viewBox="0 0 24 24">
+            {CCIcon}
+          </SmallIcon>
+          <InfoText>{this.state.overview.captions ? (this.state.captionsExpanded ? this.state.overview.captions.join(', ') : this.state.overview.captions.slice(0, 2).join(', ') + ', ' + this.captionSpan()) : null}</InfoText>
+        </TrailingInfo>
         <ButtonWrapper>
           <Wishlist />
           <Share handleClick={this.shareClick} />

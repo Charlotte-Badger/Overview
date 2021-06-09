@@ -8,8 +8,8 @@ const star = (fill, num) => {
 };
 
 const numberWithCommas = (x) => {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-}
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+};
 
 const Rating = (props) => {
   const five = [0, 1, 2, 3, 4];
@@ -26,10 +26,10 @@ const Rating = (props) => {
     <RatingInternalWrapper>
       {props.average.toFixed(1)}
       <StarSet>{props.condensed ? star(1, 1) : starArray}</StarSet>
-      <Total>{"(" + numberWithCommas(props.total) + (props.condensed ? ")" : " ratings)")}</Total>
+      <Total>{'(' + numberWithCommas(props.total) + (props.condensed ? ')' : ' ratings)')}</Total>
       <Total>{props.students ? numberWithCommas(props.students) : null} students</Total>
     </RatingInternalWrapper>
-  )
+  );
 };
 
 export { Rating as default };
