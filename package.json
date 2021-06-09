@@ -7,7 +7,6 @@
   },
   "scripts": {
     "build": "webpack",
-    "react-dev": "webpack -d --watch",
     "start": "nodemon server/start.js",
     "fake100": "node database/overview100.js",
     "test": "jest --detectOpenHandles"

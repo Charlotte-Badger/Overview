@@ -6,7 +6,7 @@ const copyToClipboard = function (e) {
   e.preventDefault();
   e.target[0].select();
   document.execCommand('copy');
-}
+};
 
 const ShareModal = (props) => {
   return (
@@ -20,9 +20,9 @@ const ShareModal = (props) => {
             <ShareCopy type="submit"><span>Copy</span></ShareCopy>
           </form>
         </ModalBox>
-        </ModalContent>
+      </ModalContent>
     </ModalWrapper>
-  )
-}
+  );
+};
 
 export { ShareModal as default };

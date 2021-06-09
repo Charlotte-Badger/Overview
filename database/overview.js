@@ -6,18 +6,18 @@ mongoose.connect('mongodb://localhost/overview', {
 
 var db = mongoose.connection;
 
-db.on("error", console.error.bind(console, "connection error:"));
+db.on('error', console.error.bind(console, 'connection error:'));
 
 let overviewSchema = new mongoose.Schema({
-  "courseId": Number,
-  "title": String, // this may actually be fetched from course content API instead -- TBD
-  "tagline": String,
-  "students": Number,
-  "subjects": [String],
-  "author": Number, // external ID
-  "thumbnail": String,
-  "language": String,
-  "captions": [String]
+  'courseId': Number,
+  'title': String, // this may actually be fetched from course content API instead -- TBD
+  'tagline': String,
+  'students': Number,
+  'subjects': [String],
+  'author': Number, // external ID
+  'thumbnail': String,
+  'language': String,
+  'captions': [String]
 });
 
 let Overview = mongoose.model('Overview', overviewSchema);
@@ -36,16 +36,16 @@ let save = (records) => {
       captions: record.captions
     });
     Promise.resolve(entry.save())
-    .then(doc => console.log('Saved', doc._doc.title))
-    .catch(err => console.log(err))
-  })
+      .then(doc => console.log('Saved', doc._doc.title))
+      .catch(err => console.log(err));
+  });
 };
 
 let get = (courseId, callback) => {
   Overview.find({courseId: courseId})
-  .then(doc => callback(doc))
-  .catch(err => console.log(err));
-}
+    .then(doc => callback(doc))
+    .catch(err => console.log(err));
+};
 
 
 

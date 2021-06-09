@@ -7,7 +7,7 @@ class Wishlist extends React.Component {
     super(props);
     this.state = {
       wishlist: false
-    }
+    };
     this.wishClick = this.wishClick.bind(this);
   }
 
@@ -29,8 +29,8 @@ class Wishlist extends React.Component {
           </svg>
         </WishContents>
       </WishlistButton>
-    )
+    );
   }
-};
+}
 
 export default Wishlist;
