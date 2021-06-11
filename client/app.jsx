@@ -24,6 +24,7 @@ class Overview extends React.Component {
         total: 0
       },
       author: {},
+      price: {},
       updatedAt: '1-1-2021',
       showModal: false,
       captionsExpanded: false
@@ -41,7 +42,7 @@ class Overview extends React.Component {
   }
 
   componentDidUpdate() {
-    ReactDOM.render(<Infobar title={this.state.overview.title} showBest={bestseller(this.state.review.average, this.state.review.total, this.state.overview.students)} average={this.state.review.average} total={this.state.review.total} students={this.state.overview.students} />, document.getElementById('infobar'));
+    ReactDOM.render(<Infobar title={this.state.overview.title} showBest={bestseller(this.state.review.average, this.state.review.total, this.state.overview.students)} average={this.state.review.average} total={this.state.review.total} students={this.state.overview.students} price={this.state.price.basePrice}/>, document.getElementById('infobar'));
   }
 
   getOverview(id = 5) {
@@ -81,7 +82,17 @@ class Overview extends React.Component {
                       author: res.data
                     });
                   })
-                  .catch((err) => console.log(err));
+                  .then(() => {
+                    axios.get(`http://13.57.183.76:3004/price/?courseId=${id}`)
+                      .then((res) => {
+                        console.log('price:', res.data);
+                        this.setState({
+                          price: res.data
+                        });
+                      })
+                      .catch((err) => console.log(err))
+                  })
+                  .catch((err) => console.log(err))
               })
               .catch((err) => console.log(err));
           })

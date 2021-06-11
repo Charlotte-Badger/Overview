@@ -28,7 +28,8 @@ export const Tagline = styled.div`
   `;
 
 export const BestBox = styled.div`
-  display: ${props => props.showBest ? 'inline' : 'none'};;
+  display: ${props => props.showBest ? 'inline' : 'none'};
+  margin-right: 4px;
   `;
 
 export const Bestseller = styled.span`
@@ -102,7 +103,7 @@ export const StarSet = styled.div`
 export const RatingInternalWrapper = styled.div`
   display:inline;
   font-size:14px;
-  margin-left: 4px;
+  margin-left: 0;
   color:#FFC48C;
   font-family:"sf pro display", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   `;
@@ -350,8 +351,7 @@ export const InfobarWrapper = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding: 16px 24px;
   position: fixed;
   top: 0;
   bottom: auto;
@@ -369,8 +369,53 @@ export const InfobarTitle = styled.div`
   font-size: 0.8 rem;
   letter-spacing: 0.03rem;
   margin-bottom: 8px;
+  display: block;
   `;
 
+export const InfobarLeft = styled.div`
+  float: left;
+  `;
+
+export const InfobarRight = styled.div`
+  @media (min-width: 1080px) {
+    display: none;
+  }
+  position: absolute;
+  top: 20%;
+  right: 0%;
+  font-size: 19px;
+  font-weight: 700;
+  margin-right: 80px;
+  text-align: right;
+  box-sizing: border-box;
+  `;
+
+export const InfoPrice = styled.div`
+  display: inline;
+
+  `;
+
+export const InfoRedirect = styled.a`
+  text-decoration: none;
+  `;
+
+export const InfoBuy = styled.button`
+  display: inline;
+  color: white;
+  border: 0;
+  border-radius: 4px;
+  background-color: #0f7c90;
+  &:hover {
+    background-color: #083e48;
+  }
+  padding: 0 16px;
+  margin-left: 10px;
+  align-items: center;
+  height: 48px;
+  font-size: 16px;
+  font-weight: 700;
+
+  `;
 
 export const Arrow = (
   <path d="M8.59 7.41L13.17 12l-4.58 4.59L10 18l6-6-6-6-1.41 1.41z"></path>
