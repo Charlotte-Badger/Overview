@@ -40,6 +40,10 @@ class Overview extends React.Component {
     this.getOverview(course);
   }
 
+  componentDidUpdate() {
+    ReactDOM.render(<Infobar title={this.state.overview.title} showBest={bestseller(this.state.review.average, this.state.review.total, this.state.overview.students)} average={this.state.review.average} total={this.state.review.total} students={this.state.overview.students} />, document.getElementById('infobar'));
+  }
+
   getOverview(id = 5) {
     axios.get(`http://ec2-54-234-67-3.compute-1.amazonaws.com:3000/overview/?courseId=${id}`)
       .then((res) => {
@@ -113,7 +117,6 @@ class Overview extends React.Component {
   render () {
     return (
       <BodyWrapper>
-        <Infobar title={this.state.overview.title} showBest={bestseller(this.state.review.average, this.state.review.total, this.state.overview.students)} average={this.state.review.average} total={this.state.review.total} students={this.state.overview.students} />
         <ShareModal showModal={this.state.showModal} handleClick={this.shareClick} />
         <div><Subjects subjects={this.state.overview.subjects} /></div>
         <Title>{this.state.overview.title}</Title>
@@ -137,7 +140,7 @@ class Overview extends React.Component {
           <SmallIcon viewBox="0 0 24 24">
             {CCIcon}
           </SmallIcon>
-          <InfoText>{this.state.overview.captions ? (this.state.captionsExpanded ? this.state.overview.captions.join(', ') : this.state.overview.captions.slice(0, 2).join(', ') + ', ' + this.captionSpan()) : null}</InfoText>
+          <InfoText>{this.state.overview.captions ? this.state.overview.captions.join(', ') : null}</InfoText>
         </TrailingInfo>
         <ButtonWrapper>
           <Wishlist />

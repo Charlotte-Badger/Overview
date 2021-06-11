@@ -354,6 +354,11 @@ export const InfobarWrapper = styled.div`
   padding-bottom: 15px;
   position: fixed;
   top: 0;
+  bottom: auto;
+  @media (max-width: 1080px) {
+    top: auto;
+    bottom: 0;
+  }
   width: 100%;
   z-index: 1000;
   display: block;
