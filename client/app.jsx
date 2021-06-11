@@ -23,6 +23,7 @@ class Overview extends React.Component {
         average: 0,
         total: 0
       },
+      author: {},
       updatedAt: '1-1-2021',
       showModal: false,
       captionsExpanded: false
@@ -69,6 +70,15 @@ class Overview extends React.Component {
                   updatedAt: updatedAt
                 });
               })
+              .then(() => {
+                axios.get(`http://ec2-3-95-223-55.compute-1.amazonaws.com:4095/author/?authorId=${this.state.overview.author}`)
+                  .then((res) => {
+                    this.setState({
+                      author: res.data
+                    });
+                  })
+                  .catch((err) => console.log(err));
+              })
               .catch((err) => console.log(err));
           })
           .catch((err) => console.log(err));
@@ -110,7 +120,7 @@ class Overview extends React.Component {
         <Tagline>{this.state.overview.tagline}</Tagline>
         <BestBox id="best" showBest={bestseller(this.state.review.average, this.state.review.total, this.state.overview.students)}><Bestseller>Bestseller</Bestseller></BestBox>
         <RatingWrapper><Rating average={this.state.review.average} total={this.state.review.total} students={this.state.overview.students} condensed={false} /></RatingWrapper>
-        <AuthorWrapper>Created by <AuthorName href="#author">Constanza Nomina</AuthorName></AuthorWrapper>
+        <AuthorWrapper>Created by <AuthorName href="#author">{this.state.author.firstName} {this.state.author.lastName}</AuthorName></AuthorWrapper>
         <TrailingInfo>
           <SmallIcon margin-bottom="4px" viewBox="0 0 24 24">
             {UpdatedIcon}
