@@ -633,6 +633,61 @@ export const CostFloat = styled.div`
   box-sizing: border-box;
   `;
 
+export const PreviewVideo = styled.button`
+  position: relative;
+  display: none;
+  @media (max-width: 1080px) {
+    display: inline-block;
+  }
+  border: 0;
+  border-radius: 4px;
+  width: 340px;
+  height: 192px;
+  margin: 2px;
+  box-sizing: border-box;
+  padding: 0;
+  `;
+
+export const PreviewVideoImage = styled.img`
+  border-radius: 4px;
+  width: 340px;
+  height: 192px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  `;
+
+export const VideoOverlay = styled.span`
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: linear-gradient(180deg, rgba(30, 30, 30, 0) 0%, rgba(30, 30, 30, 0.9) 100%);
+  z-index: 50;
+  width: 340px;
+  height: 192px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  `;
+
+export const VideoSVG = styled.svg`
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  width: 340px;
+  height: 192px;
+  margin: 1px;
+  box-sizing: border-box;
+  padding: 0;
+  `;
+
+export const VideoWrapper = styled.div`
+  display: block;
+  text-align: center;
+  `;
+
 export const Arrow = (
   <path d="M8.59 7.41L13.17 12l-4.58 4.59L10 18l6-6-6-6-1.41 1.41z"></path>
 );

@@ -1,5 +1,6 @@
 import ApplyCoupon from './components/ApplyCoupon.jsx';
 import axios from 'axios';
+import Captions from './components/Captions.jsx';
 import Gift from './components/Gift.jsx';
 import Infobar from './components/Infobar.jsx';
 import moment from 'moment';
@@ -11,7 +12,7 @@ import ShareModal from './components/ShareModal.jsx';
 import styled from 'styled-components';
 import Subjects from './components/Subjects.jsx';
 import Wishlist from './components/Wishlist.jsx';
-import { BodyWrapper, BodyContentWrapper, Title, Tagline, BestBox, Bestseller, RatingWrapper, AuthorWrapper, AuthorName, TrailingInfo, SmallIcon, InfoText, UpdatedIcon, GlobeIcon, CCIcon, ButtonWrapper, ButtonBreak, SmallWrapper, LineBreak, Buy, BuyContents, BuyText, BuyPriceText, RadioButton, AddToCartWrapper, AddToCart, Conditions, SubscribeText, PersonalPlan, PlanHeader, CheckIcon, PersonalText, PlanItem, LearnMore, CostFloat } from './components/Styles.jsx';
+import { BodyWrapper, BodyContentWrapper, Title, Tagline, BestBox, Bestseller, RatingWrapper, AuthorWrapper, AuthorName, TrailingInfo, SmallIcon, InfoText, UpdatedIcon, GlobeIcon, CCIcon, ButtonWrapper, ButtonBreak, SmallWrapper, LineBreak, Buy, BuyContents, BuyText, BuyPriceText, RadioButton, AddToCartWrapper, AddToCart, Conditions, SubscribeText, PersonalPlan, PlanHeader, CheckIcon, PersonalText, PlanItem, LearnMore, CostFloat, PreviewVideo, PreviewVideoImage, VideoOverlay, VideoSVG, VideoWrapper } from './components/Styles.jsx';
 
 const bestseller = (average, ratings, total) => average >= 3.7 && ratings >= 50 && total >= 50000;
 
@@ -28,6 +29,7 @@ class Overview extends React.Component {
       },
       author: {},
       price: {},
+      video: {},
       updatedAt: '1-1-2021',
       showModal: false,
       captionsExpanded: false,
@@ -91,10 +93,17 @@ class Overview extends React.Component {
                   .then(() => {
                     axios.get(`http://13.57.183.76:3004/price/?courseId=${id}`)
                       .then((res) => {
-                        console.log('price:', res.data);
                         this.setState({
                           price: res.data
                         });
+                      })
+                      .then(() => {
+                        axios.get(`http://13.57.183.76:3004/previewVideo/?courseId=${id}`)
+                          .then((res) => {
+                            this.setState({
+                              video: res.data
+                            });
+                          });
                       })
                       .catch((err) => console.log(err));
                   })
@@ -144,6 +153,19 @@ class Overview extends React.Component {
       <BodyWrapper>
         <ShareModal showModal={this.state.showModal} handleClick={this.shareClick} />
         <div><Subjects subjects={this.state.overview.subjects} /></div>
+        <VideoWrapper>
+          <a href={this.state.video.previewVideoUrl}>
+            <PreviewVideo>
+              <PreviewVideoImage alt="Preview video image for this class." src={this.state.video.previewVideoImgUrl} />
+              <VideoOverlay />
+              <VideoSVG xmlns="http://www.w3.org/2000/svg">
+                <ellipse stroke="#000" strokeWidth="0" ry="32" rx="31.50001" id="svg_2" cy="50%" cx="50%" fill="#ffffff"></ellipse>
+                <path transform="rotate(90 172.951 96)" stroke="#000" id="svg_9" d="m161.10466,107.73892l11.84616,-23.47785l11.84616,23.47785l-23.69232,0z" fill="#000000"></path>
+              </VideoSVG>
+              <span class="sidebar-preview-video-overlay-text sidebar-tight-letters">Preview this course</span>
+            </PreviewVideo>
+          </a>
+        </VideoWrapper>
         <Title>{this.state.overview.title}</Title>
         <Tagline>{this.state.overview.tagline}</Tagline>
         <BestBox id="best" showBest={bestseller(this.state.review.average, this.state.review.total, this.state.overview.students)}><Bestseller>Bestseller</Bestseller></BestBox>
@@ -165,7 +187,7 @@ class Overview extends React.Component {
           <SmallIcon viewBox="0 0 24 24">
             {CCIcon}
           </SmallIcon>
-          <InfoText>{this.state.overview.captions ? this.state.overview.captions.join(', ') : null}</InfoText>
+          <InfoText><Captions captions={this.state.overview.captions} expanded={this.state.captionsExpanded} handleClick={this.captionsClick}/></InfoText>
         </TrailingInfo>
         {!this.state.matches && (
           <SmallWrapper>
