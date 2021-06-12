@@ -1,4 +1,6 @@
+import ApplyCoupon from './components/ApplyCoupon.jsx';
 import axios from 'axios';
+import Captions from './components/Captions.jsx';
 import Gift from './components/Gift.jsx';
 import Infobar from './components/Infobar.jsx';
 import moment from 'moment';
@@ -10,9 +12,11 @@ import ShareModal from './components/ShareModal.jsx';
 import styled from 'styled-components';
 import Subjects from './components/Subjects.jsx';
 import Wishlist from './components/Wishlist.jsx';
-import { BodyWrapper, Title, Tagline, BestBox, Bestseller, RatingWrapper, AuthorWrapper, AuthorName, TrailingInfo, SmallIcon, InfoText, UpdatedIcon, GlobeIcon, CCIcon, ButtonWrapper } from './components/Styles.jsx';
+import { BodyWrapper, BodyContentWrapper, Title, Tagline, BestBox, Bestseller, RatingWrapper, AuthorWrapper, AuthorName, TrailingInfo, SmallIcon, InfoText, UpdatedIcon, GlobeIcon, CCIcon, ButtonWrapper, ButtonBreak, SmallWrapper, LineBreak, Buy, BuyContents, BuyText, BuyPriceText, RadioButton, AddToCartWrapper, AddToCart, Conditions, SubscribeText, PersonalPlan, PlanHeader, CheckIcon, PersonalText, PlanItem, LearnMore, CostFloat, PreviewVideo, PreviewVideoImage, VideoOverlay, VideoSVG, VideoWrapper, VideoSubtext } from './components/Styles.jsx';
 
 const bestseller = (average, ratings, total) => average >= 3.7 && ratings >= 50 && total >= 50000;
+
+const lower = (str) => str.slice(0, 1).toLowerCase() + str.slice(1);
 
 class Overview extends React.Component {
   constructor(props) {
@@ -24,24 +28,29 @@ class Overview extends React.Component {
         total: 0
       },
       author: {},
+      price: {},
+      video: {},
       updatedAt: '1-1-2021',
       showModal: false,
-      captionsExpanded: false
+      captionsExpanded: false,
+      buy: true,
+      matches: window.matchMedia('(min-width: 1080px)').matches
     };
     this.shareClick = this.shareClick.bind(this);
     this.captionsClick = this.captionsClick.bind(this);
+    this.handleBuy = this.handleBuy.bind(this);
   }
 
   componentDidMount() {
     const regex = /\d+/;
     let course = window.location.search.match(regex) === null ? 5 : window.location.search.match(regex)[0];
-    console.log(course);
-    console.log('Updated at', moment(this.state.updatedAt).format('M/YYYY'));
+    const handler = e => this.setState({matches: e.matches});
+    window.matchMedia('(min-width: 1080px)').addListener(handler);
     this.getOverview(course);
   }
 
   componentDidUpdate() {
-    ReactDOM.render(<Infobar title={this.state.overview.title} showBest={bestseller(this.state.review.average, this.state.review.total, this.state.overview.students)} average={this.state.review.average} total={this.state.review.total} students={this.state.overview.students} />, document.getElementById('infobar'));
+    ReactDOM.render(<Infobar title={this.state.overview.title} showBest={bestseller(this.state.review.average, this.state.review.total, this.state.overview.students)} average={this.state.review.average} total={this.state.review.total} students={this.state.overview.students} price={this.state.price.basePrice}/>, document.getElementById('infobar'));
   }
 
   getOverview(id = 5) {
@@ -81,6 +90,23 @@ class Overview extends React.Component {
                       author: res.data
                     });
                   })
+                  .then(() => {
+                    axios.get(`http://13.57.183.76:3004/price/?courseId=${id}`)
+                      .then((res) => {
+                        this.setState({
+                          price: res.data
+                        });
+                      })
+                      .then(() => {
+                        axios.get(`http://13.57.183.76:3004/previewVideo/?courseId=${id}`)
+                          .then((res) => {
+                            this.setState({
+                              video: res.data
+                            });
+                          });
+                      })
+                      .catch((err) => console.log(err));
+                  })
                   .catch((err) => console.log(err));
               })
               .catch((err) => console.log(err));
@@ -114,11 +140,32 @@ class Overview extends React.Component {
     );
   }
 
+  handleBuy (e) {
+    if (e.target.id === 'overview-buy-course') {
+      this.setState({buy: true});
+    } else if (e.target.id === 'overview-subscribe') {
+      this.setState({buy: false});
+    }
+  }
+
   render () {
     return (
       <BodyWrapper>
         <ShareModal showModal={this.state.showModal} handleClick={this.shareClick} />
         <div><Subjects subjects={this.state.overview.subjects} /></div>
+        <VideoWrapper>
+          <a href={this.state.video.previewVideoUrl}>
+            <PreviewVideo>
+              <PreviewVideoImage alt="Preview video image for this class." src={this.state.video.previewVideoImgUrl} />
+              <VideoOverlay />
+              <VideoSVG xmlns="http://www.w3.org/2000/svg">
+                <ellipse stroke="#000" strokeWidth="0" ry="32" rx="31.50001" id="svg_2" cy="50%" cx="50%" fill="#ffffff"></ellipse>
+                <path transform="rotate(90 172.951 96)" stroke="#000" id="svg_9" d="m161.10466,107.73892l11.84616,-23.47785l11.84616,23.47785l-23.69232,0z" fill="#000000"></path>
+              </VideoSVG>
+              <VideoSubtext>Preview this course</VideoSubtext>
+            </PreviewVideo>
+          </a>
+        </VideoWrapper>
         <Title>{this.state.overview.title}</Title>
         <Tagline>{this.state.overview.tagline}</Tagline>
         <BestBox id="best" showBest={bestseller(this.state.review.average, this.state.review.total, this.state.overview.students)}><Bestseller>Bestseller</Bestseller></BestBox>
@@ -140,13 +187,88 @@ class Overview extends React.Component {
           <SmallIcon viewBox="0 0 24 24">
             {CCIcon}
           </SmallIcon>
-          <InfoText>{this.state.overview.captions ? this.state.overview.captions.join(', ') : null}</InfoText>
+          <InfoText><Captions captions={this.state.overview.captions} expanded={this.state.captionsExpanded} handleClick={this.captionsClick}/></InfoText>
         </TrailingInfo>
-        <ButtonWrapper>
+        {!this.state.matches && (
+          <SmallWrapper>
+            <LineBreak />
+            <Buy>
+              <RadioButton id='overview-buy-course' buy={this.state.buy} onClick={this.handleBuy}/><BuyText>Buy Course</BuyText><CostFloat big={true} buy={this.state.buy}>${this.state.price.basePrice}</CostFloat>
+            </Buy>
+            <BuyContents buy={this.state.buy}>
+              <BuyPriceText>${this.state.price.basePrice}</BuyPriceText>
+              <AddToCartWrapper>
+                <AddToCart>
+                  Add to cart
+                </AddToCart>
+              </AddToCartWrapper>
+              <Conditions>
+                30-Day Money-Back Guarantee
+              </Conditions>
+              <Conditions>
+                Full Lifetime Access
+              </Conditions>
+            </BuyContents>
+          </SmallWrapper>
+        )}
+        <ButtonWrapper matches={this.state.matches} buy={this.state.buy}>
           <Wishlist />
           <Share handleClick={this.shareClick} />
-          <Gift />
+          <ButtonBreak>
+            <Gift />
+            <ApplyCoupon />
+          </ButtonBreak>
         </ButtonWrapper>
+        {!this.state.matches && (
+          <SmallWrapper>
+            <LineBreak />
+            <Buy>
+              <RadioButton id='overview-subscribe' buy={!this.state.buy} onClick={this.handleBuy}/><BuyText>Subscribe</BuyText><CostFloat big={false} buy={!this.state.buy}>Free Trial</CostFloat>
+
+              <SubscribeText buy={this.state.buy}>Get this course plus top-rated picks in {this.state.overview.subjects ? this.state.overview.subjects[1] : null} and other popular topics <LearnMore buy={this.state.buy} href='http://udemy.com/personal-plan'>Learn More</LearnMore></SubscribeText>
+            </Buy>
+            <BuyContents buy={!this.state.buy}>
+              <AddToCartWrapper>
+                <AddToCart>
+                  Try it free for 7 days
+                </AddToCart>
+              </AddToCartWrapper>
+              <Conditions>
+                  $19.99 per month after trial
+              </Conditions>
+              <PersonalPlan>
+                <PlanHeader>
+                  Personal Plan
+                </PlanHeader>
+                <PlanItem>
+                  <SmallIcon viewBox="0 0 24 24">
+                    {CheckIcon}
+                  </SmallIcon>
+                  <PersonalText>
+                    Access to 5,000+ top courses
+                  </PersonalText>
+                </PlanItem>
+                <PlanItem>
+                  <SmallIcon viewBox="0 0 24 24">
+                    {CheckIcon}
+                  </SmallIcon>
+                  <PersonalText>
+                    Courses in {this.state.overview.subjects ? (lower(this.state.overview.subjects[0]) + ', ' + lower(this.state.overview.subjects[1])) : null}, and more
+                  </PersonalText>
+                </PlanItem>
+                <PlanItem>
+                  <SmallIcon viewBox="0 0 24 24">
+                    {CheckIcon}
+                  </SmallIcon>
+                  <PersonalText>
+                    Practice tests, exercises, and Q & A
+                  </PersonalText>
+                </PlanItem>
+              </PersonalPlan>
+              <LineBreak />
+            </BuyContents>
+          </SmallWrapper>
+        )}
       </BodyWrapper>
     );
   }
