@@ -12,7 +12,7 @@ import ShareModal from './components/ShareModal.jsx';
 import styled from 'styled-components';
 import Subjects from './components/Subjects.jsx';
 import Wishlist from './components/Wishlist.jsx';
-import { BodyWrapper, BodyContentWrapper, Title, Tagline, BestBox, Bestseller, RatingWrapper, AuthorWrapper, AuthorName, TrailingInfo, SmallIcon, InfoText, UpdatedIcon, GlobeIcon, CCIcon, ButtonWrapper, ButtonBreak, SmallWrapper, LineBreak, Buy, BuyContents, BuyText, BuyPriceText, RadioButton, AddToCartWrapper, AddToCart, Conditions, SubscribeText, PersonalPlan, PlanHeader, CheckIcon, PersonalText, PlanItem, LearnMore, CostFloat, PreviewVideo, PreviewVideoImage, VideoOverlay, VideoSVG, VideoWrapper, VideoSubtext } from './components/Styles.jsx';
+import { BodyWrapper, BodyContentWrapper, Title, Tagline, BestBox, Bestseller, RatingWrapper, AuthorWrapper, AuthorName, TrailingInfo, SmallIcon, InfoText, UpdatedIcon, GlobeIcon, CCIcon, ButtonWrapper, ButtonBreak, SmallWrapper, LineBreak, Buy, BuyContents, BuyText, BuyPriceText, RadioButton, AddToCartWrapper, AddToCart, Conditions, SubscribeText, PersonalPlan, PlanHeader, CheckIcon, PersonalText, PlanItem, LearnMore, CostFloat, PreviewVideo, PreviewVideoImage, VideoOverlay, VideoSVG, VideoWrapper, VideoSubtext, PlayButtonReal } from './components/Styles.jsx';
 
 const bestseller = (average, ratings, total) => average >= 3.7 && ratings >= 50 && total >= 50000;
 
@@ -159,9 +159,9 @@ class Overview extends React.Component {
               <PreviewVideoImage alt="Preview video image for this class." src={this.state.video.previewVideoImgUrl} />
               <VideoOverlay />
               <VideoSVG xmlns="http://www.w3.org/2000/svg">
-                <ellipse stroke="#000" strokeWidth="0" ry="32" rx="31.50001" id="svg_2" cy="50%" cx="50%" fill="#ffffff"></ellipse>
-                <path transform="rotate(90 172.951 96)" stroke="#000" id="svg_9" d="m161.10466,107.73892l11.84616,-23.47785l11.84616,23.47785l-23.69232,0z" fill="#000000"></path>
+                <ellipse stroke="#000" strokeWidth="0" ry="32" rx="31.50001" cy="50%" cx="50%" fill="#ffffff"></ellipse>
               </VideoSVG>
+              <PlayButtonReal>▸</PlayButtonReal>
               <VideoSubtext>Preview this course</VideoSubtext>
             </PreviewVideo>
           </a>

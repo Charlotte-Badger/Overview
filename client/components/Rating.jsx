@@ -14,10 +14,10 @@ const numberWithCommas = (x) => {
 const Rating = (props) => {
   const five = [0, 1, 2, 3, 4];
   const starArray = five.map(num => {
-    if (props.average - num <= 0.2) {
+    if (props.average.toFixed(1) - num <= 0.3) {
       return star(0, num);
     }
-    if (props.average - num >= 0.8) {
+    if (props.average.toFixed(1) - num >= 0.7) {
       return star(1, num);
     }
     return star(0.5, num);

@@ -377,7 +377,7 @@ export const ShareHtml = styled.input`
   border-bottom-left-radius: 4px;
   border: 1px solid grey;
   height: 40px;
-  width: 78%;
+  width: 75%;
   display: inline;
   background-color: white;
   `;
@@ -394,7 +394,7 @@ export const ShareCopy = styled.button`
   background-color: #0f7c90;
   margin: auto;
   height: 44px;
-  width: 20%;
+  width: 15%;
   border: 1px solid grey;
   &:hover {
     background-color: #083e48;
@@ -641,8 +641,7 @@ export const PreviewVideo = styled.button`
   }
   border: 0;
   border-radius: 4px;
-  width: 340px;
-  height: 192px;
+  width: 100%;
   margin: 2px;
   box-sizing: border-box;
   padding: 0;
@@ -650,8 +649,7 @@ export const PreviewVideo = styled.button`
 
 export const PreviewVideoImage = styled.img`
   border-radius: 4px;
-  width: 340px;
-  height: 192px;
+  width: 100%;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -663,8 +661,8 @@ export const VideoOverlay = styled.span`
   left: 0;
   background: linear-gradient(180deg, rgba(30, 30, 30, 0) 0%, rgba(30, 30, 30, 0.9) 100%);
   z-index: 50;
-  width: 340px;
-  height: 192px;
+  width: 100%;
+  height: 100%;
   border-radius: 4px;
   box-sizing: border-box;
   margin: 0;
@@ -676,8 +674,8 @@ export const VideoSVG = styled.svg`
   top: 0;
   left: 0;
   z-index: 100;
-  width: 340px;
-  height: 192px;
+  width: 100%;
+  height: 100%;
   margin: 1px;
   box-sizing: border-box;
   padding: 0;
@@ -686,6 +684,27 @@ export const VideoSVG = styled.svg`
 export const VideoWrapper = styled.div`
   display: block;
   text-align: center;
+  width: 100%;
+  `;
+
+export const PlayButtonReal = styled.span`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 101;
+  font-size: 4rem;
+  line-height: 0rem;
+  text-indent: -15px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  color: black;
+  -webkit-transform:scale(1.5, 1.0);
+  -moz-transform:scale(1.5, 1.0);
+  -ms-transform:scale(1.5, 1.0);
+  -o-transform:scale(1.5, 1.0);
+  transform:scale(1.5,1.0);
   `;
 
 export const VideoSubtext = styled.div`
