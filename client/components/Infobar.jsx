@@ -8,7 +8,6 @@ import { InfobarWrapper, InfobarLeft, InfobarRight, InfoPrice, InfoBuy, InfoRedi
 const bestseller = (average, ratings, total) => average >= 3.7 && ratings >= 50 && total >= 50000;
 
 const Infobar = (props) => {
-  console.log('Info props', props);
   return (
     <InfobarWrapper>
       <InfobarLeft>

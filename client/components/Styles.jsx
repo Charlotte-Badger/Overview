@@ -4,8 +4,8 @@ import styled from 'styled-components';
 export const BodyWrapper = styled.div`
   background-color: #1e1e1c;
   margin-top: 86px;
-  margin-right: 0px;
-  margin-left: 0px;
+  width: 100%;
+  display: block;
   `;
 
 export const Title = styled.h1`
@@ -121,6 +121,7 @@ export const WishlistButton = styled.button`
   color: white;
   height: 40px;
   width: 20%;
+  cursor: pointer;
   border: 1px solid white;
   margin: 8px;
   font-weight: 700;
@@ -131,11 +132,16 @@ export const WishlistButton = styled.button`
   display: inline-flex;
   min-width: 10rem;
   padding: 0 1.2rem;
+  @media (max-width: 1080px) {
+    width: 50%;
+    margin: 0;
+  }
   `;
 
 export const GiftButton = styled.button`
   position: relative;
   color: white;
+  cursor: pointer;
   height: 40px;
   width: 20%;
   border: 1px solid white;
@@ -148,14 +154,53 @@ export const GiftButton = styled.button`
   display: inline-flex;
   min-width: 10rem;
   padding: 0 1.2rem;
+  @media (max-width: 1080px) {
+    width: 50%;
+    margin: 0;
+  }
+  `;
+
+export const CouponButton = styled.button`
+  position: relative;
+  color: white;
+  height: 40px;
+  cursor: pointer;
+  width: 20%;
+  border: 1px solid white;
+  margin: 0px;
+  font-weight: 700;
+  background: transparent;
+  text-align: center;
+  align-items: center;
+  border-radius: 4px;
+  display: inline-flex;
+  min-width: 10rem;
+  padding: 0 1.2rem;
+  @media (max-width: 1080px) {
+    width: 50%;
+    margin: 0%;
+  }
+  @media (min-width: 1080px) {
+    display: none;
+    width: 50%;
+  }
   `;
 
 export const ButtonWrapper = styled.div`
-  display: block;
+  display: ${props => (props.buy || props.matches) ? 'block' : 'none'};
+  `;
+
+export const ButtonBreak = styled.div`
+  display: inline;
+  @media (max-width: 1080px) {
+    display: block;
+    margin-top: 8px;
+  }
   `;
 
 export const ShareButton = styled.button`
   position: relative;
+  cursor: pointer;
   color: white;
   height: 40px;
   width: 20%;
@@ -168,6 +213,10 @@ export const ShareButton = styled.button`
   display: inline-flex;
   min-width: 10rem;
   padding: 0 1.2rem;
+  @media (max-width: 1080px) {
+    width: 50%;
+    margin: 0;
+  }
   `;
 
 export const WishContents = styled.div`
@@ -180,6 +229,15 @@ export const WishContents = styled.div`
   `;
 
 export const GiftContents = styled.div`
+  height: 40px;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  box-sizing: border-box;
+  display: flex;
+  `;
+
+export const CouponContents = styled.div`
   height: 40px;
   align-items: center;
   margin-left: auto;
@@ -205,6 +263,10 @@ export const WishAdd = styled.div`
 export const ShareText = styled.div`
   display: flex;
   margin-right: 10px;
+  `;
+
+export const CouponText = styled.div`
+  display: flex;
   `;
 
 export const GiftText = styled.div`
@@ -407,6 +469,7 @@ export const InfoBuy = styled.button`
   background-color: #0f7c90;
   &:hover {
     background-color: #083e48;
+    cursor: pointer;
   }
   padding: 0 16px;
   margin-left: 10px;
@@ -415,6 +478,159 @@ export const InfoBuy = styled.button`
   font-size: 16px;
   font-weight: 700;
 
+  `;
+
+export const SmallWrapper = styled.div`
+  display: block;
+  height: auto;
+  `;
+
+export const LineBreak = styled.div`
+  width: 100%;
+  height: 8px;
+  display: block;
+  border-top: 1px solid white;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  `;
+
+export const Buy = styled.div`
+  display: block;
+  padding: 0px;
+  `;
+
+export const BuyContents = styled.div`
+  display: ${props => props.buy ? 'block' : 'none'};
+  `;
+
+export const RadioButton = styled.div`
+  border: .15rem solid white;
+  margin-right: .8rem;
+  height: .8rem;
+  width: .8rem;
+  cursor: pointer;
+  position: relative;
+  top: .2rem;
+  border-radius: 50%;
+  display: inline-block;
+  background: ${props => props.buy ? 'white' : 'none'};
+  box-shadow: 0 0 0 0.15rem #1e1e1c inset;
+  `;
+
+export const BuyText = styled.div`
+  color: white;
+  font-family: sf pro display,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -.02rem;
+  font-size: 1rem;
+  display: inline;
+  `;
+
+export const BuyPriceText = styled.div`
+  display: block;
+  font-family: sf pro text,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+  font-weight: 600;
+  line-height: 1.4;
+  font-size: 1.8rem;
+  margin-top: 16px;
+  color: white;
+  `;
+
+export const AddToCartWrapper = styled.a`
+  text-decoration: none;
+  `;
+
+export const AddToCart = styled.button`
+position: relative;
+height: 48px;
+background-color: #ec5252;
+&:hover {
+background-color: red;
+}
+color: white;
+align-items: center;
+border-radius: 4px;
+border: none;
+cursor: pointer;
+display: block;
+min-width: 10rem;
+width: 100%;
+padding: 0 1.2rem;
+margin: 1rem 0;
+justify-content: center;
+vertical-align: bottom;
+white-space: nowrap;
+font-family: sf pro display,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+font-weight: 600;
+line-height: 1.2;
+letter-spacing: -.02rem;
+font-size: 1rem;
+  `;
+
+export const Conditions = styled.div`
+  display: block;
+  color: white;
+  font-family: sf pro display,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+  font-size: .75rem;
+  font-weight: 300;
+  margin: 1.2rem 0;
+  text-align: center;
+  `;
+
+export const SubscribeText = styled.div`
+  font-family: sf pro text,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+  color: white;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  margin-left: ${props => props.buy ? '30px' : '0'};
+  font-weight: 300;
+  line-height: 1.4;
+  font-size: 0.9rem;
+  letter-spacing: 0.1px;
+  display: block;
+  `;
+
+export const PersonalPlan = styled.div`
+  display: block;
+  color: white;
+  font-family: sf pro text,-apple-system,BlinkMacSystemFont,Roboto,segoe ui,Helvetica,Arial,sans-serif,apple color emoji,segoe ui emoji,segoe ui symbol;
+  `;
+
+export const PlanHeader = styled.div`
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+`;
+
+export const PersonalText = styled.span`
+  font-size: 0.85rem;
+  margin-left: 14px;
+  display: inline;
+  `;
+
+export const PlanItem = styled.div`
+  margin-bottom: 8px;
+  `;
+
+export const LearnMore = styled.a`
+  font-family: "sf pro display", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  color: #8ED1DC;
+  display: ${props => props.buy ? 'none' : 'inline'};
+  text-decoration: none;
+  `;
+
+export const CostFloat = styled.div`
+  font-family: "sf pro display", -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  position: relative;
+  float: right;
+  color: white;
+  font-size: ${props => props.big ? '1rem' : '12px'};
+  font-weight: ${props => props.big ? 600 : 500};
+  display: ${props => props.buy ? 'none' : 'inline'};
+  box-sizing: border-box;
   `;
 
 export const Arrow = (
@@ -460,4 +676,8 @@ export const HeartPath = (filling) => {
 
 export const SharePath = (
   <path d="M23.25 10.75L14.5 2v5C5.75 8.25 2 14.5.75 20.75c3.125-4.375 7.5-6.375 13.75-6.375V19.5l8.75-8.75z" fill="white" id="share5"></path>
+);
+
+export const CheckIcon = (
+  <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" fill="white"></path>
 );

@@ -1,3 +1,4 @@
+import ApplyCoupon from './components/ApplyCoupon.jsx';
 import axios from 'axios';
 import Gift from './components/Gift.jsx';
 import Infobar from './components/Infobar.jsx';
@@ -10,9 +11,11 @@ import ShareModal from './components/ShareModal.jsx';
 import styled from 'styled-components';
 import Subjects from './components/Subjects.jsx';
 import Wishlist from './components/Wishlist.jsx';
-import { BodyWrapper, Title, Tagline, BestBox, Bestseller, RatingWrapper, AuthorWrapper, AuthorName, TrailingInfo, SmallIcon, InfoText, UpdatedIcon, GlobeIcon, CCIcon, ButtonWrapper } from './components/Styles.jsx';
+import { BodyWrapper, BodyContentWrapper, Title, Tagline, BestBox, Bestseller, RatingWrapper, AuthorWrapper, AuthorName, TrailingInfo, SmallIcon, InfoText, UpdatedIcon, GlobeIcon, CCIcon, ButtonWrapper, ButtonBreak, SmallWrapper, LineBreak, Buy, BuyContents, BuyText, BuyPriceText, RadioButton, AddToCartWrapper, AddToCart, Conditions, SubscribeText, PersonalPlan, PlanHeader, CheckIcon, PersonalText, PlanItem, LearnMore, CostFloat } from './components/Styles.jsx';
 
 const bestseller = (average, ratings, total) => average >= 3.7 && ratings >= 50 && total >= 50000;
+
+const lower = (str) => str.slice(0, 1).toLowerCase() + str.slice(1);
 
 class Overview extends React.Component {
   constructor(props) {
@@ -27,17 +30,20 @@ class Overview extends React.Component {
       price: {},
       updatedAt: '1-1-2021',
       showModal: false,
-      captionsExpanded: false
+      captionsExpanded: false,
+      buy: true,
+      matches: window.matchMedia('(min-width: 1080px)').matches
     };
     this.shareClick = this.shareClick.bind(this);
     this.captionsClick = this.captionsClick.bind(this);
+    this.handleBuy = this.handleBuy.bind(this);
   }
 
   componentDidMount() {
     const regex = /\d+/;
     let course = window.location.search.match(regex) === null ? 5 : window.location.search.match(regex)[0];
-    console.log(course);
-    console.log('Updated at', moment(this.state.updatedAt).format('M/YYYY'));
+    const handler = e => this.setState({matches: e.matches});
+    window.matchMedia('(min-width: 1080px)').addListener(handler);
     this.getOverview(course);
   }
 
@@ -90,9 +96,9 @@ class Overview extends React.Component {
                           price: res.data
                         });
                       })
-                      .catch((err) => console.log(err))
+                      .catch((err) => console.log(err));
                   })
-                  .catch((err) => console.log(err))
+                  .catch((err) => console.log(err));
               })
               .catch((err) => console.log(err));
           })
@@ -125,6 +131,14 @@ class Overview extends React.Component {
     );
   }
 
+  handleBuy (e) {
+    if (e.target.id === 'overview-buy-course') {
+      this.setState({buy: true});
+    } else if (e.target.id === 'overview-subscribe') {
+      this.setState({buy: false});
+    }
+  }
+
   render () {
     return (
       <BodyWrapper>
@@ -153,11 +167,86 @@ class Overview extends React.Component {
           </SmallIcon>
           <InfoText>{this.state.overview.captions ? this.state.overview.captions.join(', ') : null}</InfoText>
         </TrailingInfo>
-        <ButtonWrapper>
+        {!this.state.matches && (
+          <SmallWrapper>
+            <LineBreak />
+            <Buy>
+              <RadioButton id='overview-buy-course' buy={this.state.buy} onClick={this.handleBuy}/><BuyText>Buy Course</BuyText><CostFloat big={true} buy={this.state.buy}>${this.state.price.basePrice}</CostFloat>
+            </Buy>
+            <BuyContents buy={this.state.buy}>
+              <BuyPriceText>${this.state.price.basePrice}</BuyPriceText>
+              <AddToCartWrapper>
+                <AddToCart>
+                  Add to cart
+                </AddToCart>
+              </AddToCartWrapper>
+              <Conditions>
+                30-Day Money-Back Guarantee
+              </Conditions>
+              <Conditions>
+                Full Lifetime Access
+              </Conditions>
+            </BuyContents>
+          </SmallWrapper>
+        )}
+        <ButtonWrapper matches={this.state.matches} buy={this.state.buy}>
           <Wishlist />
           <Share handleClick={this.shareClick} />
-          <Gift />
+          <ButtonBreak>
+            <Gift />
+            <ApplyCoupon />
+          </ButtonBreak>
         </ButtonWrapper>
+        {!this.state.matches && (
+          <SmallWrapper>
+            <LineBreak />
+            <Buy>
+              <RadioButton id='overview-subscribe' buy={!this.state.buy} onClick={this.handleBuy}/><BuyText>Subscribe</BuyText><CostFloat big={false} buy={!this.state.buy}>Free Trial</CostFloat>
+
+              <SubscribeText buy={this.state.buy}>Get this course plus top-rated picks in {this.state.overview.subjects ? this.state.overview.subjects[1] : null} and other popular topics <LearnMore buy={this.state.buy} href='http://udemy.com/personal-plan'>Learn More</LearnMore></SubscribeText>
+            </Buy>
+            <BuyContents buy={!this.state.buy}>
+              <AddToCartWrapper>
+                <AddToCart>
+                  Try it free for 7 days
+                </AddToCart>
+              </AddToCartWrapper>
+              <Conditions>
+                  $19.99 per month after trial
+              </Conditions>
+              <PersonalPlan>
+                <PlanHeader>
+                  Personal Plan
+                </PlanHeader>
+                <PlanItem>
+                  <SmallIcon viewBox="0 0 24 24">
+                    {CheckIcon}
+                  </SmallIcon>
+                  <PersonalText>
+                    Access to 5,000+ top courses
+                  </PersonalText>
+                </PlanItem>
+                <PlanItem>
+                  <SmallIcon viewBox="0 0 24 24">
+                    {CheckIcon}
+                  </SmallIcon>
+                  <PersonalText>
+                    Courses in {this.state.overview.subjects ? (lower(this.state.overview.subjects[0]) + ', ' + lower(this.state.overview.subjects[1])) : null}, and more
+                  </PersonalText>
+                </PlanItem>
+                <PlanItem>
+                  <SmallIcon viewBox="0 0 24 24">
+                    {CheckIcon}
+                  </SmallIcon>
+                  <PersonalText>
+                    Practice tests, exercises, and Q & A
+                  </PersonalText>
+                </PlanItem>
+              </PersonalPlan>
+              <LineBreak />
+            </BuyContents>
+          </SmallWrapper>
+        )}
       </BodyWrapper>
     );
   }
