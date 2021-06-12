@@ -688,6 +688,21 @@ export const VideoWrapper = styled.div`
   text-align: center;
   `;
 
+export const VideoSubtext = styled.div`
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  z-index: 100;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  `;
+
 export const Arrow = (
   <path d="M8.59 7.41L13.17 12l-4.58 4.59L10 18l6-6-6-6-1.41 1.41z"></path>
 );
